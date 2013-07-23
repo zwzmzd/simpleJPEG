@@ -15,3 +15,15 @@
 *.exe
 *.out
 *.app
+
+# misc
+*.o
+*~
+*.tmp
+*.a
+*.d
+*.out
+*.out.core
+127.0.0.1.*
+*.jpg
+*.bmp
