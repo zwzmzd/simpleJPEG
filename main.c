@@ -247,7 +247,7 @@ int main(int argc, char *argv[])
 	
 	if (argc < 3)
 	{
-		fprintf(stderr, "Usage: main.exe input.bmp output.jpg\n");
+		fprintf(stderr, "Usage: %s input.bmp output.jpg\n", argv[0]);
 		return -1;
 	}
 
