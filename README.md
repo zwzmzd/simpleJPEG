@@ -27,4 +27,5 @@ $ make
 $ ./main.exe testcase/in.bmp testcase/out.jpg
 ```
 
-大家对这个程序如果有什么好的意见和建议，欢迎交流
+推荐一个解析JPEG格式的工具
+[JPEGsnoop](http://www.impulseadventure.com/photo/jpeg-snoop.html)
