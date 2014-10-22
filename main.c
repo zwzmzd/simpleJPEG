@@ -273,7 +273,7 @@ int main(int argc, char *argv[])
 	//frame = data + 0x36;
 	
 	assert(size == calc_bmp_size(pi, pj));
-	frame = (char *)malloc(size);
+	frame = (unsigned char *)malloc(size);
 	fread(frame, 1, size, fp);
 
 	printf("%d: %d * %d\n", size, pj, pi);

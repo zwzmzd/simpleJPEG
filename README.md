@@ -13,4 +13,12 @@ $ make
 $ ./main.exe testcase/in.bmp testcase/out.jpg
 ```
 
+或者使用cmake生成编译工程(推荐)
+```bash
+$ cd simpleJPEG
+$ mkdir build
+$ cd build
+$ cmake ..
+```
+
 大家对这个程序如果有什么好的意见和建议，欢迎交流
