@@ -7,6 +7,8 @@ simpleJPEG
 
 在Windows下也能正确地编译运行，不过需要配置gcc和mingw环境。建议安装TDM-GCC套件，另外需要寻找一个可用的make程序
 
+** 程序暂时只支持24位BMP图片读取，请使用24位BMP图片作为输入 **
+
 ```bash
 $ cd simpleJPEG
 $ make
