@@ -23,12 +23,14 @@ void revert(void *src, void *dst, size_t t)
 		((char *)dst)[i] = ((char *)src)[t - i - 1];
 }
 
-uint_32 calc_bmp_size(int pv, int ph)
+uint_32 calc_bmp_size(int pv, int ph, int channels)
 {
 	uint_32 t = 0;
 	int i, j;
 	
-	t = ph * 3;
+	// pixels * (channels per pixel)
+	t = ph * channels;
+	// every line must align to 4 bytes
 	t = (t + 3) & 0xfffffffc;
 	t *= pv;
 	
@@ -241,6 +243,7 @@ int main(int argc, char *argv[])
 	uint_16 *p_16;
 	uint_32 *p_32;
 	uint_32 size;
+	uint_32 channels;
 	uint_8 *frame;
 	static char buf[100];
 	int i, j;
@@ -260,24 +263,31 @@ int main(int argc, char *argv[])
 	p_32 = (uint_32 *)&data[2];
 
 	size = *p_32;
-
+	// subtract header size
 	size -= 0x36;
 
+	// image width in pixels
 	p_32 = (uint_32 *)&data[0x12];
 	pj = *p_32;
 
+	// image height in pixels
 	p_32 = (uint_32 *)&data[0x16];
 	pi = *p_32;
 
+	// image channels per pixels
+	p_32 = (uint_32 *)&data[0x1c];
+	channels = *p_32 / 8;
 
-	//frame = data + 0x36;
-	
-	assert(size == calc_bmp_size(pi, pj));
+	if (channels != 3) {
+		printf("SORRY:\n\tour application only support the BMP file with exactly 3 channels per pixel.\n");
+		printf("\tYou can get such file using Paint in Windows.\n");
+		exit(-1);
+	}
+	assert(size == calc_bmp_size(pi, pj, channels));
 	frame = (unsigned char *)malloc(size);
 	fread(frame, 1, size, fp);
 
-	printf("%d: %d * %d\n", size, pj, pi);
-
+	printf("%d: %d * %d * %d\n", size, pj, pi, channels);
 	
 	//write header
 	buf[0] = 0xFF;
