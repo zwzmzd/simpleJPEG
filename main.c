@@ -130,14 +130,15 @@ void encode(uint_8 data[], uint_32 ph, uint_32 pv)
 	int pre_DC_Y, pre_DC_Cb, pre_DC_Cr;
 	uint_8 *now = data;
 	uint_32 total_pixel = H_block_count * V_block_count * 64;
+	size_t memory_size = total_pixel * sizeof(int);
 	
-	Y_data = (int (*)[8][8])malloc(total_pixel * sizeof(int));
-	Cb_data = (int (*)[8][8])malloc(total_pixel * sizeof(int));
-	Cr_data = (int (*)[8][8])malloc(total_pixel * sizeof(int));
+	Y_data = (int(*)[8][8])malloc(memory_size);
+	Cb_data = (int(*)[8][8])malloc(memory_size);
+	Cr_data = (int(*)[8][8])malloc(memory_size);
 	
-	memset(Y_data, 0, total_pixel);
-	memset(Cb_data, 0, total_pixel);
-	memset(Cr_data, 0, total_pixel);
+	memset(Y_data, 0, memory_size);
+	memset(Cb_data, 0, memory_size);
+	memset(Cr_data, 0, memory_size);
 
 	for ( i = pv - 1 ; i >= 0; i--)
 	{
